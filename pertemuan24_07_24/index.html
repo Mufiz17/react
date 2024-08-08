@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Learn About React Manually</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const container = document.getElementById("root"); 
+    const root = ReactDOM.createRoot(container); 
+    
+    // Define Header Component
+    function Header({ author }) {
+      return (
+        <div>
+          <h1>Learn React With Mr. {author ? author : 'Bakti'}</h1>
+          <p onClick={(e) => { alert("Ok"); }} > {" "} Keep Spirit
+          </p>
+        </div>
+      );
+
+    } 
+    function Homepage() {
+      const students = ['Mufiz', 'Ihsanulhaq']
+      const [likes, setLikes] = React.useState(0)
+
+      function handleClick(){
+        setLikes(likes + 1)
+      }
+
+      return (
+        <>
+        <Header/>
+        <Header author='Mirza' />
+        <ul>
+          {students.map(student => (
+            <li key={student}>{student}</li>
+          ))}
+          </ul>
+          <button onClick = {handleClick}>Likes ({likes})</button>
+          </>);
+    } 
+    root.render(<Homepage />);
+  </script>
+</body>
+
+</html>

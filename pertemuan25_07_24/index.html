@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Learn About React Manually</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+
+        }
+
+        .flex {
+            display: flex;
+            max-width: 10%;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .resetBtn {
+            display: flex;
+            max-width: 10%;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const container = document.getElementById("root");
+        const root = ReactDOM.createRoot(container);
+
+        function Button(onClick, label, number) {
+            const disabled = (label !== reset) ? (number > 9 || number < 0 ? true : false) : false
+            return (
+                <div>
+                    <button onClick={onClick} disabled={disabled}>{label}</button>
+                </div>
+            )
+        }
+
+        function Component(number) {
+
+            function plusHandleClick() {
+                setNumber(number + 1)
+            }
+
+            function minusHandleClick() {
+                setNumber(number - 1)
+            }
+
+            function reset() {
+                setNumber(0)
+            }
+
+            const limit = number < 0 || number >= 10
+            return (
+                <div>
+                    <button onClick={plusHandleClick} disabled={limit}>Click Me</button>
+                </div>
+            )
+        }
+
+        function Operator() {
+            const [number, setNumber] = React.useState(0)
+
+            function plusHandleClick() {
+                setNumber(number + 1)
+            }
+
+            function minusHandleClick() {
+                setNumber(number - 1)
+            }
+
+            function reset() {
+                setNumber(0)
+            }
+
+            const ternary = number >= 0 && number < 10 ? number : 'Done!'
+
+            return (
+                <div>
+                    <h1>Welcome to the Homepage</h1>
+                    <div class='flex'>
+                        <button onClick={minusHandleClick} disabled={number < 0 || number >= 10}>-</button>
+                        <p>{ternary}</p>
+                        <button onClick={plusHandleClick} disabled={number < 0 || number >= 10}>+</button>
+                    </div>
+                    <div class='resetBtn'>
+                        <button id='myBtn' onClick={reset}>Reset</button>
+                    </div>
+                </div>
+            )
+        }
+
+
+        function Homepage() {
+
+            return (
+                <div>
+                    <Operator />
+                </div>
+            )
+        }
+        root.render(<Homepage />);
+    </script>
+</body>
+
+</html>
